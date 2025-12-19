@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: trackwize-cloud-common
