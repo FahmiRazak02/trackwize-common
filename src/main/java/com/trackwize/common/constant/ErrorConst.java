@@ -35,6 +35,15 @@ public class ErrorConst {
     public static final String SQL_EXCEPTION_CODE = "10009";
     public static final String SQL_EXCEPTION_MSG = "SQL Exception has occur, please try again.";
 
+    public static final String CREATE_RECORD_FAILED_CODE = "10010";
+    public static final String CREATE_RECORD_FAILED_MSG = "Failed to create record, please try again.";
+
+    public static final String UPDATE_RECORD_FAILED_CODE = "10011";
+    public static final String UPDATE_RECORD_FAILED_MSG = "Failed to update record, please try again.";
+
+    public static final String DELETE_RECORD_FAILED_CODE = "10010";
+    public static final String DELETE_RECORD_FAILED_MSG = "Failed to delete record, please try again.";
+
 
 //    AUTHENTICATION ERROR CODE - 20001 to 29999
 

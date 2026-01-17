@@ -6,9 +6,12 @@ public class NotificationConst {
         throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
 
-    public final static char EMAIL_NTF_TYPE = 'E';
-    public final static char INBOX_NTF_TYPE = 'I';
+    public static final char EMAIL_NTF_TYPE = 'E';
+    public static final char INBOX_NTF_TYPE = 'I';
 
-    public final static int PASSWORD_RESET_TEMPLATE = 1;
+    public static final int PASSWORD_RESET_TEMPLATE = 1;
+    public static final int REGISTRATION_RESULT_TEMPLATE = 2;
+    public static final int ACCOUNT_VERIFICATION_TEMPLATE = 3;
+
 
 }
