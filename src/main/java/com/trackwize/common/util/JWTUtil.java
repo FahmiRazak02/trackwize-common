@@ -30,7 +30,7 @@ public class JWTUtil {
 
     public String generateToken(Map<String, Object> claims, String subject, int accessTokenTimeout) {
 
-        long expirationMillis = accessTokenTimeout * 1000L;
+        long expirationMillis = accessTokenTimeout * 60 * 1000L;
         return Jwts.builder()
                 .setClaims(claims != null ? claims : new HashMap<>())
                 .setSubject(subject)

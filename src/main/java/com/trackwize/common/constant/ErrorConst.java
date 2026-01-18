@@ -86,6 +86,12 @@ public class ErrorConst {
     public static final String UPDATE_PASSWORD_FAILED_CODE = "20013";
     public static final String UPDATE_PASSWORD_FAILED_MSG = "Failed to update user password.";
 
+    public static final String CREATE_USER_FAILED_CODE = "20014";
+    public static final String CREATE_USER_FAILED_MSG = "Failed to create new user.";
+
+    public static final String UPDATE_USER_FAILED_CODE = "20014";
+    public static final String UPDATE_USER_FAILED_MSG = "Failed to update user.";
+
     //    NOTIFICATION ERROR CODE - 30001 to 39999
 
     public static final String NOTIFICATION_ERROR_CODE = "30001";
