@@ -10,9 +10,9 @@ public class NotificationConst {
     public static final char INBOX_NTF_TYPE = 'I';
 
     public static final int PASSWORD_RESET_TEMPLATE = 1;
-    public static final int REGISTRATION_RESULT_TEMPLATE = 2;
-    public static final int ACCOUNT_VERIFICATION_TEMPLATE = 3;
-    public static final int ACCOUNT_CREATED_TEMPLATE = 4;
+    public static final int ACCOUNT_IS_CREATED_TEMPLATE = 2;
+    public static final int ACCOUNT_IS_VERIFIED_TEMPLATE = 3;
+    public static final int ACCOUNT_IS_ACTIVATE_TEMPLATE = 4;
 
 
 }
