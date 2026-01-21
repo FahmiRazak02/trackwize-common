@@ -12,7 +12,11 @@ public class DBConst {
     public static final String BUDGET_TABLE = "budgest";
     public static final String RECURRING_EXPENSE_TABLE = "recurring_expenses";
 
-    public static final String STATUS_ACTIVE = "'ACTIVE'";
-    public static final String STATUS_INACTIVE = "'INACTIVE'";
-    public static final String STATUS_PENDING = "'PENDING'";
+    public static final String STATUS_ACTIVE_QUERY = "'ACTIVE'";
+    public static final String STATUS_INACTIVE_QUERY = "'INACTIVE'";
+    public static final String STATUS_PENDING_QUERY = "'PENDING'";
+
+    public static final String STATUS_PENDING_CREATE = "PENDING";
+
+    public static final Long USER_ID_SYSTEM = 0L;
 }
