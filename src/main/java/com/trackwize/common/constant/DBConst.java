@@ -16,6 +16,7 @@ public class DBConst {
     public static final String STATUS_INACTIVE_QUERY = "'INACTIVE'";
     public static final String STATUS_PENDING_QUERY = "'PENDING'";
 
+    public static final String STATUS_ACTIVE_CREATE = "ACTIVE";
     public static final String STATUS_PENDING_CREATE = "PENDING";
 
     public static final Long USER_ID_SYSTEM = 0L;
