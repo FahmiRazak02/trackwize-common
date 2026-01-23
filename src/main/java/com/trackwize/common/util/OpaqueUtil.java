@@ -1,5 +1,7 @@
 package com.trackwize.common.util;
 
+import org.springframework.stereotype.Component;
+
 import java.security.SecureRandom;
 import java.util.Base64;
 
@@ -17,7 +19,7 @@ import java.util.Base64;
  * - No encoding required
  * - No embedded data
  */
-public final class OpaqueUtil {
+public class OpaqueUtil {
 
     private static final SecureRandom SECURE_RANDOM = new SecureRandom();
 
