@@ -15,9 +15,9 @@ public class LoggingAspect {
     public Object logController(ProceedingJoinPoint joinPoint) throws Throwable {
         String methodName = joinPoint.getSignature().toShortString();
 
-        log.info(">>>>> [START] {}", methodName);
+        log.info("[START | {} ]", methodName);
         Object result = joinPoint.proceed();
-        log.info("<<<<< [ END ] {}", methodName);
+        log.info("[ END  | {} ]", methodName);
 
         return result;
     }
@@ -25,10 +25,10 @@ public class LoggingAspect {
     @Around("within(@org.springframework.stereotype.Service *)")
     public Object logServiceMethods(ProceedingJoinPoint joinPoint) throws Throwable {
         String methodName = joinPoint.getSignature().toShortString();
-        log.info(">>>>> [START] {}", methodName);
+        log.info("[START | {} ]", methodName);
         Object result = joinPoint.proceed();
 
-        log.info("<<<<< [ END ] {}", methodName);
+        log.info("[ END  | {} ]", methodName);
         return result;
     }
 }

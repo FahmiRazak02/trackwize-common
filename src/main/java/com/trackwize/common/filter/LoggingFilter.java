@@ -1,5 +1,6 @@
 package com.trackwize.common.filter;
 
+import com.trackwize.common.util.LogUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -62,13 +63,12 @@ public class LoggingFilter extends OncePerRequestFilter {
         ContentCachingResponseWrapper wrappedResponse = new ContentCachingResponseWrapper(response);
 
         try {
-            int lineLength = 100;
-            log.info(repeatCharLine('=', lineLength));
+            log.info(LogUtil.repeatCharLine('=', null));
             log.info("Incoming Request");
             log.info("    method      : {}", wrappedRequest.getMethod());
             log.info("    uri         : {}", wrappedRequest.getRequestURI());
             log.info("    userId      : {}", userId != null ? userId : "anonymous");
-            log.info(repeatCharLine('-', lineLength));
+            log.info(LogUtil.repeatCharLine('=', null));
 
             filterChain.doFilter(wrappedRequest, wrappedResponse);
 
@@ -78,8 +78,5 @@ public class LoggingFilter extends OncePerRequestFilter {
         }
     }
 
-    public static String repeatCharLine(char c, int length) {
-        return String.valueOf(c).repeat(Math.max(0, length));
-    }
 }
 

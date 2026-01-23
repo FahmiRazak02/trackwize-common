@@ -1,5 +1,6 @@
 package com.trackwize.common.jms;
 
+import com.trackwize.common.util.LogUtil;
 import jakarta.jms.JMSException;
 import jakarta.jms.Message;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,8 @@ import java.time.Instant;
 @Slf4j
 public abstract class JmsListenerBase {
 
+    private static final int MAX_PAYLOAD_LENGTH = 500;
+
     public final void handle(Message message) throws JMSException {
         Instant start = Instant.now();
         String trackingId = message.getJMSCorrelationID();
@@ -21,15 +24,32 @@ public abstract class JmsListenerBase {
         MDC.put("trackingId", trackingId != null ? trackingId : messageId);
         MDC.put("destination", destination);
 
-        log.info("[{}] Received message with trackingId={}", destination, trackingId);
-
         try {
+            log.info(LogUtil.repeatCharLine('=', null));
+            log.info("Incoming JMS Message");
+            log.info("     queue        : {}", destination);
+            log.info("     trackingId   : {}", trackingId != null ? trackingId : messageId);
+            log.info("     payload      : {}", truncateMessage(message));
+            log.info(LogUtil.repeatCharLine('-', null));
+
             onMessage(message);
+
+            log.info(LogUtil.repeatCharLine('-', null));
+            Instant end = Instant.now();
+            log.info("Outgoing JMS Processing");
+            log.info("    status        : SUCCESS");
+            log.info("    processed in  : {} ms", Duration.between(start, end).toMillis());
+            log.info(LogUtil.repeatCharLine('=', null));
+
         } catch (Exception e) {
-            log.error("Error while processing JMS message", e);
+            log.info(LogUtil.repeatCharLine('-', null));
+            Instant end = Instant.now();
+            log.error("Outgoing JMS Processing");
+            log.error("    status        : FAILED");
+            log.error("    processed in  : {} ms", Duration.between(start, end).toMillis());
+            log.error("Error while processing JMS message with trackingId={}", trackingId, e);
+            log.info(LogUtil.repeatCharLine('=', null));
         } finally {
-            log.info("Processed JMS message in {} ms",
-                    Duration.between(start, Instant.now()).toMillis());
             MDC.clear();
         }
     }
@@ -53,6 +73,18 @@ public abstract class JmsListenerBase {
         } catch (Exception e) {
             log.warn("Failed to read JMSDestination", e);
             return "UNKNOWN";
+        }
+    }
+
+    private String truncateMessage(Message message) {
+        try {
+            String payload = message.getBody(String.class);
+            if (payload.length() > MAX_PAYLOAD_LENGTH) {
+                return payload.substring(0, MAX_PAYLOAD_LENGTH) + "...[truncated]";
+            }
+            return payload;
+        } catch (Exception e) {
+            return "[unable to read payload]";
         }
     }
 }
