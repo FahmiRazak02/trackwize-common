@@ -19,7 +19,9 @@ public class ActiveMQUtil {
     private long receiveTimeout;
 
     public void send(String correlationId, String destination, String content) {
-        log.info("[JMS-SEND] messageId={} destination={} content={}", correlationId, destination, content);
+        log.info("[JMS-SEND] Sending message to {}", destination);
+        log.info("tracking id = {}", correlationId);
+        LogUtil.logPrettyJson(log, "content", content);
         try {
             jmsTemplate.send(destination, session -> {
                 TextMessage message = session.createTextMessage(content);

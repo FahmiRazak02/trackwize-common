@@ -3,6 +3,7 @@ package com.trackwize.common.jms;
 import com.trackwize.common.util.LogUtil;
 import jakarta.jms.JMSException;
 import jakarta.jms.Message;
+import jakarta.jms.TextMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.MDC;
@@ -20,6 +21,12 @@ public abstract class JmsListenerBase {
         String trackingId = message.getJMSCorrelationID();
         String messageId = getMessageId(message);
         String destination = getDestination(message);
+        String payload;
+        if (message instanceof TextMessage textMessage) {
+            payload = textMessage.getText();
+        }else {
+            payload = message.toString();
+        }
 
         MDC.put("trackingId", trackingId != null ? trackingId : messageId);
         MDC.put("destination", destination);
@@ -29,7 +36,8 @@ public abstract class JmsListenerBase {
             log.info("Incoming JMS Message");
             log.info("     queue        : {}", destination);
             log.info("     trackingId   : {}", trackingId != null ? trackingId : messageId);
-            log.info("     payload      : {}", truncateMessage(message));
+            LogUtil.logPrettyJson(log, " payload     ", payload);
+
             log.info(LogUtil.repeatCharLine('-', null));
 
             onMessage(message);
